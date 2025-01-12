@@ -12,3 +12,6 @@ RUN apt update && apt install pandoc git -y
 ARG GH_TOKEN=""
 RUN git clone https://oauth:${GH_TOKEN}@github.com/alexpilotti/bbk-mres
 WORKDIR bbk-mres/
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
