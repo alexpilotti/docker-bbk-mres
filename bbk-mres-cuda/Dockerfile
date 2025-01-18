@@ -16,6 +16,7 @@ ARG GH_TOKEN=""
 RUN git clone https://oauth:${GH_TOKEN}@github.com/alexpilotti/bbk-mres
 WORKDIR bbk-mres/
 RUN pip install -r requirements.txt
+RUN apt install mmseqs2 -y
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
