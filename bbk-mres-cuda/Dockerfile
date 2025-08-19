@@ -1,4 +1,5 @@
-FROM nvidia/cuda:12.6.3-base-ubuntu22.04
+# Devel image includes NVCC, needed by DeepSpeed
+FROM nvidia/cuda:12.6.3-devel-ubuntu22.04
 ENV PYTHONUNBUFFERED=1
 RUN apt update && apt install python3 python3-venv git hmmer -y
 WORKDIR /
