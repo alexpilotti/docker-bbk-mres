@@ -1,7 +1,15 @@
 # Devel image includes NVCC, needed by DeepSpeed
 FROM nvidia/cuda:12.6.3-devel-ubuntu22.04
 ENV PYTHONUNBUFFERED=1
-RUN apt update && apt install python3 python3-dev python3-venv git hmmer -y
+RUN apt update && apt install -y --no-install-recommends \
+  python3 \
+  python3-dev \
+  python3-venv \
+  git \
+  hmmer \
+  mmseqs2 \
+  unzip \
+  && rm -rf /var/lib/apt/lists/*
 WORKDIR /
 RUN python3 -m venv venv
 ENV PATH="/venv/bin:$PATH"
@@ -17,8 +25,6 @@ ARG GH_TOKEN=""
 RUN git clone https://oauth:${GH_TOKEN}@github.com/alexpilotti/bbk-mres
 WORKDIR bbk-mres/
 RUN pip install -r requirements.txt
-RUN apt install mmseqs2 -y
-RUN apt install unzip -y
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
