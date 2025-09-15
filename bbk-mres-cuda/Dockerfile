@@ -9,6 +9,7 @@ RUN apt update && apt install -y --no-install-recommends \
   hmmer \
   mmseqs2 \
   unzip \
+  libaio-dev \
   && rm -rf /var/lib/apt/lists/*
 WORKDIR /
 RUN python3 -m venv venv
